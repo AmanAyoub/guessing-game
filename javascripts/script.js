@@ -16,17 +16,20 @@ document.addEventListener("DOMContentLoaded", e => {
     let message;
     guessesCount += 1;
 
-    if (guess === answer) {
-      message = `You guessed it! It took you ${guessesCount} guesses`;
-    } else if (guess > answer) {
-      message = `My number is lower than ${guess}`;
-    } else if (guess < answer) {
-      message = `My number is higher than ${guess}`;
+    if (Number.isNaN(guess) || guess < 1) {
+      message = "Invalid input. Enter an integer between 1 and 100";
+    } else {
+      if (guess === answer) {
+        message = `You guessed it! It took you ${guessesCount} guess${guessesCount === 1 ? "" : "es"}`;
+        submit.setAttribute("disabled", "true");
+      } else if (guess > answer) {
+        message = `My number is lower than ${guess}`;
+      } else if (guess < answer) {
+        message = `My number is higher than ${guess}`;
+      }
     }
 
     paragraph.textContent = message;
-
-    console.log({answer, guessesCount});
   });
 
   let newGame = document.querySelector("a");
@@ -36,5 +39,7 @@ document.addEventListener("DOMContentLoaded", e => {
     paragraph.textContent = "Guess a number between 1 and 100";
     answer = numberBetween(1, 100);
     guessesCount = 0;
+    submit.removeAttribute("disabled");
+    input.value = "";
   });
 });
