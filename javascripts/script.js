@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", e => {
   let submit = document.querySelector("input[type='submit'");
   let input = document.querySelector("#guess");
   let guessesCount = 0;
+  let paragraph = document.querySelector("main > p");
 
   submit.addEventListener("click", event => {
     event.preventDefault();
@@ -23,7 +24,17 @@ document.addEventListener("DOMContentLoaded", e => {
       message = `My number is higher than ${guess}`;
     }
 
-    let paragraph = document.querySelector("main > p");
     paragraph.textContent = message;
+
+    console.log({answer, guessesCount});
+  });
+
+  let newGame = document.querySelector("a");
+  newGame.addEventListener("click", event => {
+    event.preventDefault();
+
+    paragraph.textContent = "Guess a number between 1 and 100";
+    answer = numberBetween(1, 100);
+    guessesCount = 0;
   });
 });
