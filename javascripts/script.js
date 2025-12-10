@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", e => {
       message = `My number is higher than ${guess}`;
     }
 
-    console.log(message);
+    let paragraph = document.querySelector("main > p");
+    paragraph.textContent = message;
   });
 });
